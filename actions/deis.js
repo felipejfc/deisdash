@@ -44,7 +44,7 @@ const buildURL = (path, controller, versionStr, noTrailingSlash = false) => {
 }
 
 const mapState = (s) => {
-  const version = s.controllerInfo ? s.controllerInfo.version : 1
+  const version = s.controllerInfo ? s.controllerInfo.version : 2.2
   return {
     controller: s.controller,
     version,
