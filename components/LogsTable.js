@@ -15,7 +15,7 @@ const parseLine = line => {
 
 // date, app, process
 const parseLogs = (logs) => (
-  logs.split('\\n')
+  logs.substring(2,logs.length-1).split('\\n')
     .map((line) => line.trim())
     .filter((line) => line !== '')
     .map(parseLine)
