@@ -98,11 +98,19 @@ const client = ['get', 'put', 'post', 'del', 'head', 'options'].reduce((obj, met
       // Unexpected error... network error?
       err.isFetchError = true
       throw err
-    }).then((response) => (
+    }).then((response) => {
       // Try to parse response as JSON
       // and ignore parsing error
-      response.json().catch(() => null).then((json) => [response, json])
-    )).then(([response, json]) => (
+      // on error, return raw
+      return response.text().then((text) => {
+        try{
+          const jsonResponse = JSON.parse(text)
+          return [response, jsonResponse] 
+        } catch(err) {
+          return [response, text]
+        }
+      })
+    }).then(([response, json]) => (
       dispatch(mapResponse(response, json, baseAction))
     )).catch((err) => {
       if (err.isFetchError) {
