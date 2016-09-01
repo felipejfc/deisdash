@@ -64,6 +64,7 @@ class Users extends React.Component {
     this.onDestroyUser = this.onDestroyUser.bind(this)
     this.grantAdmin = this.grantAdmin.bind(this)
     this.revokeAdmin = this.revokeAdmin.bind(this)
+    this.createUser = this.createUser.bind(this)
   }
   // TODO: also do this in willreceiveprops
   componentWillMount() {
@@ -78,6 +79,11 @@ class Users extends React.Component {
   onDestroyUser(username) {
     const { dispatch } = this.props
     dispatch(deis.delUser(username))
+  }
+
+  createUser(username, password, email) {
+    const { dispatch } = this.props
+    dispatch(deis.createUser(username, password, email))
   }
 
   grantAdmin(username) {
